@@ -22,36 +22,36 @@ class App extends Component {
 
     action = () => {
         console.log('Кнопка нажата!');
-        this.state.myArray.splice(0, 5)
-        while (this.state.myArray.length < 5) {
+        let newArray = [];
+        while (newArray.length < 5) {
             let n = (Math.floor(Math.random() * 100) + 1);
             if (n >= 5 && n <= 36) {
-                this.state.myArray.push(n)
+                newArray.push(n)
             }
-            this.state.myArray.sort(this.compareNumeric)
-            this.checkArray(this.state.myArray)
+            newArray.sort(this.compareNumeric)
+            this.checkArray(newArray)
         }
-        console.log(this.state.myArray)
-
+        let newState = {...this.state};
+        newState.myArray = newArray;
+        this.setState(newState);
+        console.log(this.state.myArray);
     };
 
 
-
-
     render() {
+
         return (
             <div className="App">
+                <div className="container">
+                    <button onClick={this.action} className={'m-3'}>New numbers</button>
 
-                <button onClick={this.action}>
-                    New numbers
-                </button>
-
-                <div>
-                    <Random num = {this.state.myArray[0]}/>
-                    <Random num = {this.state.myArray[1]}/>
-                    <Random num = {this.state.myArray[2]}/>
-                    <Random num = {this.state.myArray[3]}/>
-                    <Random num = {this.state.myArray[4]}/>
+                    <div>
+                        <Random number={this.state.myArray[0]}/>
+                        <Random number={this.state.myArray[1]}/>
+                        <Random number={this.state.myArray[2]}/>
+                        <Random number={this.state.myArray[3]}/>
+                        <Random number={this.state.myArray[4]}/>
+                    </div>
                 </div>
             </div>
         );
